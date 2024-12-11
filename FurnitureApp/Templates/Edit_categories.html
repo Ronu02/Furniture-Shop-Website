@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-12 grid-margin">
+    <form method="post" action="{% url 'Update_categories' Cate_id=category.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Edit Category Details</h4>
+                    <form class="forms-sample">
+                      <div class="form-group">
+                        <label for="exampleInputName1">Category Name</label>
+                        <input type="text" name="CategoryName" value="{{category.Category_name}}" class="form-control" id="exampleInputName1" placeholder="Category Name">
+                      </div>
+                      <div class="form-group">
+                        <label>Upload Category Image</label><br>
+                          <img src="{{category.Category_image.url}}" width="140px" height="100px">
+                        <input type="file" name="CategoryImage">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleTextarea1">Category Description</label>
+                        <textarea class="form-control" name="CategoryDescription" id="exampleTextarea1" rows="4" placeholder="Description">{{category.Category_description}}</textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary mr-2">Update</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+    </form>
+</div>
+</body>
+</html>
+{% endblock %}

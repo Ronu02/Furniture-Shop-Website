@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="col-lg-12 stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Contact data</h4>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-contextual">
+                        <thead>
+                          <tr>
+                            <th> First name </th>
+                            <th> Last name </th>
+                            <th> Email Address </th>
+                            <th> Message </th>
+                            <th> Action </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for d in data %}
+                          <tr>
+                            <td>{{d.First_name}}</td>
+                            <td>{{d.Last_name}}</td>
+                            <td>{{d.Email_address}}</td>
+                            <td>{{d.Message}}</td>
+                            <td>
+                              <a href="{% url 'Delete_contact' contact_id=d.id %}" class="btn btn-dark">Delete</a>
+                            </td>
+                          </tr>
+                        {% endfor %}
+
+<!--                          <tr class="table-primary">-->
+<!--                            <td> 5 </td>-->
+<!--                            <td> Edward </td>-->
+<!--                            <td> Illustrator </td>-->
+<!--                            <td> $ 160.25 </td>-->
+<!--                            <td> May 03, 2015 </td>-->
+<!--                          </tr>-->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+</body>
+</html>
+{% endblock %}

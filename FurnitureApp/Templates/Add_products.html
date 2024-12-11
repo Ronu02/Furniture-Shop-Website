@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="col-12 grid-margin stretch-card">
+               <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Add Products</h4>
+                    <form class="forms-sample" method="post" action="{% url 'Save_products' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                        <label for="exampleSelectGender">Product Category</label>
+                        <select class="form-control" id="exampleSelectGender" name="ProductCategory">
+                          <option>- Select Product Category -</option>
+                          {% for c in category %}
+                          <option>{{c.Category_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputName1">Product Name</label>
+                        <input type="text" class="form-control" name="ProductName" id="exampleInputName1" placeholder="Product Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputQuantity3">Quantity</label>
+                        <input type="number" class="form-control" min="0" name="ProductQuantity" id="exampleInputQuantity3" placeholder="Quantity">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPrice4">Price</label>
+                        <input type="text" class="form-control" name="ProductPrice" id="exampleInputPrice4" placeholder="Price">
+                      </div>
+                        <div class="form-group">
+                        <label for="exampleTextarea1">Product Description</label>
+                        <textarea class="form-control" name="ProductDescription" id="exampleTextarea1" rows="4" placeholder="Description"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputCity1">Country Of Origin</label>
+                        <input type="text" class="form-control" name="ProductOrigin" id="exampleInputCity1" placeholder="Country">
+                      </div>
+                       <div class="form-group">
+                        <label for="exampleInputName2">Manufactured By</label>
+                        <input type="text" class="form-control" name="ProductManufactures" id="exampleInputName2" placeholder="Manufactures">
+                      </div>
+                      <div class="form-group">
+                        <label>Upload Product Image 1</label><br>
+                          <input type="file" name="ProductImage1">
+                      </div>
+                      <div class="form-group">
+                          <label>Upload Product Image 2</label><br>
+                          <input type="file" name="ProductImage2">
+                      </div>
+                      <div class="form-group">
+                          <label>Upload Product Image 3</label><br>
+                          <input type="file" name="ProductImage3">
+                      </div>
+                      <button type="submit" class="btn btn-primary mr-2">Add</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+               </div>
+    </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'success' %}
+            <script>
+                swal('{{i}}', '', 'success');
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}', '', 'error');
+            </script>
+        {% elif i.tags == 'warning' %}
+            <script>
+                swal('{{i}}', '', 'warning');
+            </script>
+        {% else %}
+            <script>
+                swal('{{i}}', '', 'info');
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card" style="width: 1228px; margin-left:12px">
+                  <div class="card-body">
+                    <h4 class="card-title">Category Details</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead style="text-align: center">
+                          <tr>
+                            <th> Category Name </th>
+                            <th> Description </th>
+                            <th> Category Image </th>
+                            <th> Action </th>
+                          </tr>
+                        </thead>
+                        <tbody style="text-align:center">
+
+                        {% for c in category %}
+                          <tr>
+                            <td>{{c.Category_name}}</td>
+                            <td>{{c.Category_description}}</td>
+                            <td>
+                                <img src="{{c.Category_image.url}}">
+                            </td>
+                            <td>
+                                <a href="{% url 'Edit_categories' Cate_id=c.id %}" type="submit" class="btn btn-primary mr-2" >Edit</a>
+                                <a href="{% url 'Delete_categories' Cate_id=c.id %}" class="btn btn-dark">Delete</a>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'success' %}
+            <script>
+                swal('{{i}}', '', 'success');
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}', '', 'error');
+            </script>
+        {% elif i.tags == 'warning' %}
+            <script>
+                swal('{{i}}', '', 'warning');
+            </script>
+        {% else %}
+            <script>
+                swal('{{i}}', '', 'info');
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

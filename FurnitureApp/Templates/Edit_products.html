@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="col-12 grid-margin stretch-card">
+               <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Edit Product Details</h4>
+                    <form class="forms-sample" method="post" action="{% url 'Update_products' Pro_id=product.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                        <label for="exampleSelectGender">Product Category</label>
+                        <select class="form-control" id="exampleSelectGender" name="ProductCategory">
+                          <option>{{product.Product_category}}</option>
+                          {% for c in category %}
+                          <option>{{c.Category_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputName1">Product Name</label>
+                        <input type="text" class="form-control" name="ProductName" value="{{product.Product_name}}" id="exampleInputName1" placeholder="Product Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputQuantity3">Quantity</label>
+                        <input type="number" class="form-control" value="{{product.Product_quantity}}" name="ProductQuantity" id="exampleInputQuantity3" placeholder="Quantity">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPrice4">Price</label>
+                        <input type="text" class="form-control" value="{{product.Product_price}}" name="ProductPrice" id="exampleInputPrice4" placeholder="Price">
+                      </div>
+                        <div class="form-group">
+                        <label for="exampleTextarea1">Product Description</label>
+                        <textarea class="form-control" name="ProductDescription" id="exampleTextarea1" rows="4" placeholder="Description">{{product.Product_description}}</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputCity1">Country Of Origin</label>
+                        <input type="text" class="form-control" name="ProductOrigin" value="{{product.Product_origin}}" id="exampleInputCity1" placeholder="Country">
+                      </div>
+                       <div class="form-group">
+                        <label for="exampleInputName2">Manufactured By</label>
+                        <input type="text" class="form-control" name="ProductManufactures" value="{{product.Product_manufactures}}" id="exampleInputName2" placeholder="Manufactures">
+                      </div>
+                      <div class="form-group">
+                        <label>Upload Product Image 1</label><br>
+                          <img src="{{product.Product_image1.url}}" width="140px" height="100px">
+                          <input type="file" name="ProductImage1">
+                      </div>
+                      <div class="form-group">
+                          <label>Upload Product Image 2</label><br>
+                          <img src="{{product.Product_image2.url}}" width="140px" height="100px">
+                          <input type="file" name="ProductImage2">
+                      </div>
+                      <div class="form-group">
+                          <label>Upload Product Image 3</label><br>
+                          <img src="{{product.Product_image3.url}}" width="140px" height="100px">
+                          <input type="file" name="ProductImage3">
+                      </div>
+                      <button type="submit" class="btn btn-primary mr-2">Edit</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+               </div>
+    </div>
+</body>
+</html>
+{% endblock %}
